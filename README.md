@@ -19,7 +19,7 @@ Instructions for running bias study.  All scripts need to be updated you point t
 python Submitjobs_veryLowMass.py   
 ```
 
-5. Once jobs are complete, sum histograms with 'mergedTreesVeryLowMass.py' or 'mergedTreesVeryLowMassMulti.py'
+5. Once jobs are complete, sum histograms with `mergedTreesVeryLowMass.py` or `mergedTreesVeryLowMassMulti.py`
    - Change jobsdir to whatever you set it to in the submission script.
    - For some reason I did it stupidly and it needs a list of strings corresponding to the mass of each value you are running...
    - The submit job script will generate "massPoint.txt", so you can copy it over from there, but you should probably rewrite this whole part.
