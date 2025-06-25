@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#cd /afs/cern.ch/work/s/schhibra/DarkPhotonSearch/CMSSW_8_1_0/src
+
+echo "Change the path under this to your working directory, then delete this line"; exit 1;
+cd /afs/cern.ch/work/c/ccosby/CMSSW_8_1_0/src/BiasStudy
+
+eval `scramv1 runtime -sh`
+
+cd -
+
+cp DIRECTORY/* .
+
+combine CARD -M GenerateOnly  -m MASS --setParameters pdf_index=0 --freezeParameters pdf_index --name PDF0 -t 200 --expectSignal 0.5 -S 0 --saveToys --seed SEED
+combine CARD -M GenerateOnly  -m MASS --setParameters pdf_index=1 --freezeParameters pdf_index --name PDF1 -t 200 --expectSignal 0.5 -S 0 --saveToys --seed SEED
+#combine CARD -M GenerateOnly  -m MASS --setParameters pdf_index=2 --freezeParameters pdf_index --name PDF2 -t 200 --expectSignal 0.5 -S 0 --saveToys --seed SEED
+#combine CARD -M GenerateOnly  -m MASS --setParameters pdf_index=3 --freezeParameters pdf_index --name PDF3 -t 200 --expectSignal 0.5 -S 0 --saveToys --seed SEED
+
+combine CARD -M FitDiagnostics -m MASS --setParameters pdf_index=0  --freezeParameters pdf_index,CMS_dp_scale,CMS_dp_res --name PDF0_PDF0_SEED  -t 200 --toysFile higgsCombinePDF0.GenerateOnly.mHMASS.SEED.root --rMin -5.0 --rMax 5.0 --cminDefaultMinimizerStrategy 0 --robustFit=1 --skipBOnlyFit
+combine CARD -M FitDiagnostics -m MASS --setParameters pdf_index=0  --freezeParameters pdf_index,CMS_dp_scale,CMS_dp_res --name PDF0_PDF1_SEED  -t 200 --toysFile higgsCombinePDF1.GenerateOnly.mHMASS.SEED.root --rMin -5.0 --rMax 5.0 --cminDefaultMinimizerStrategy 0 --robustFit=1 --skipBOnlyFit
+
+combine CARD -M FitDiagnostics -m MASS --setParameters pdf_index=1  --freezeParameters pdf_index,CMS_dp_scale,CMS_dp_res --name PDF1_PDF0_SEED  -t 200 --toysFile higgsCombinePDF0.GenerateOnly.mHMASS.SEED.root --rMin -5.0 --rMax 5.0 --cminDefaultMinimizerStrategy 0 --robustFit=1 --skipBOnlyFit
+combine CARD -M FitDiagnostics -m MASS --setParameters pdf_index=1  --freezeParameters pdf_index,CMS_dp_scale,CMS_dp_res --name PDF1_PDF1_SEED  -t 200 --toysFile higgsCombinePDF1.GenerateOnly.mHMASS.SEED.root --rMin -5.0 --rMax 5.0 --cminDefaultMinimizerStrategy 0 --robustFit=1 --skipBOnlyFit
+
+cp fitDiagnostics*.root DIRECTORY/
