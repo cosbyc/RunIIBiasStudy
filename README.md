@@ -2,9 +2,7 @@ Instructions for running bias study.  All scripts need to be updated you point t
 
 1. Move all datacards and workspaces (for the sig+bkg models and masses you are studying) into "./Datacards_lowMass/".
    - If the names do not match the pattern 'dpWorkspace'+year+'IterV3_'+index+'.root" and 'dpCard_'+year+'IterV3_m'+mass+'_'+index+'.txt', either change the names or modify the job submission script.
-      - Examples:
-      	- dpCard_2018IterV3_m0.272_30.txt
-	- dpWorkspace2017IterV3_340.root
+      - Examples: `dpCard_2018IterV3_m0.272_30.txt`, `dpWorkspace2017IterV3_340.root`
 
 2. Choose a condor job template and modify it to fit your needs. Check hard coded elements, including PDF names in workspaces!
     - Use `domultifitbias_lowMass_Multi.sh.template` for the self bias of 4 different PDFs (expects cards for two seperate years currently)
